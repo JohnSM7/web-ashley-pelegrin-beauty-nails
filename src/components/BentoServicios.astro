@@ -1,0 +1,118 @@
+---
+import { servicios, fotosHero } from '../data/negocio';
+const acrilicas = servicios.find((s) => s.categoria === 'Acrílicas Esculpidas')!;
+const manicura = servicios.find((s) => s.categoria === 'Manicura & Esmaltado')!;
+const pedicura = servicios.find((s) => s.categoria === 'Pedicura')!;
+const nailart = servicios.find((s) => s.categoria === 'Nail Art')!;
+---
+
+<section id="servicios" class="relative py-20 sm:py-28 lg:py-32" style="background: var(--color-background);">
+  <div class="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
+    <div class="mb-12 flex flex-col gap-4 sm:mb-16 sm:flex-row sm:items-end sm:justify-between">
+      <div class="reveal-up">
+        <p class="text-eyebrow text-[var(--color-primary)]">Servicios</p>
+        <h2 class="mt-3 text-display-lg text-text-dark">
+          Cuatro mundos,<br />
+          <span class="italic" style="color: var(--color-primary);">una misma obsesión.</span>
+        </h2>
+      </div>
+      <p class="max-w-sm text-sm text-[var(--color-text-muted)] sm:text-right reveal-up">
+        21 servicios en carta. Todos con cita previa, producto profesional y el remate quirúrgico
+        que distingue al salón.
+      </p>
+    </div>
+
+    <!-- Bento grid asimétrico -->
+    <div class="grid grid-cols-1 gap-4 sm:gap-5 md:grid-cols-6 md:gap-6">
+      <!-- Card featured: Acrílicas -->
+      <article
+        class="glow-card relative col-span-1 overflow-hidden rounded-3xl bg-[var(--color-surface)] p-6 sm:p-8 md:col-span-4 md:row-span-2 md:p-10 reveal-up"
+        style="min-height: 360px;"
+      >
+        <div class="absolute inset-0 -z-10">
+          <img
+            src={fotosHero.poster1}
+            alt=""
+            aria-hidden="true"
+            class="h-full w-full object-cover opacity-25"
+            loading="lazy"
+            width="1000"
+            height="800"
+          />
+          <div class="absolute inset-0" style="background: linear-gradient(135deg, var(--color-surface) 0%, color-mix(in oklab, var(--color-surface) 60%, transparent) 100%);"></div>
+        </div>
+        <div class="relative flex h-full min-h-[280px] flex-col justify-between gap-8">
+          <div>
+            <p class="text-eyebrow text-[var(--color-primary)]">01 · {acrilicas.categoria}</p>
+            <h3 class="mt-3 text-display-md text-text-dark">{acrilicas.descripcion}</h3>
+          </div>
+          <div>
+            <ul class="space-y-1.5 text-sm text-[var(--color-text-dark)]">
+              {acrilicas.items.slice(0, 4).map((it) => (
+                <li class="flex items-baseline justify-between gap-4">
+                  <span class={it.destacado ? 'font-medium' : ''}>{it.nombre}</span>
+                  <span class="flex-1 mx-2 border-b border-dotted border-[var(--color-line)] translate-y-[-3px]"></span>
+                  <span class="font-display tabular-nums text-[var(--color-primary)]">{it.desde}€</span>
+                </li>
+              ))}
+            </ul>
+            <a href="#precios" class="mt-6 inline-flex items-center gap-1 text-sm font-medium text-[var(--color-text-dark)] underline-offset-4 hover:underline">
+              Ver carta completa
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M5 12h14M13 5l7 7-7 7" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Manicura -->
+      <article class="glow-card relative col-span-1 overflow-hidden rounded-3xl p-6 md:col-span-2 sm:p-7 reveal-up" style="background: var(--color-primary); color: var(--color-text-light);">
+        <p class="text-eyebrow opacity-80">02 · {manicura.categoria}</p>
+        <h3 class="mt-3 font-display text-2xl sm:text-3xl">Tu plan semanal</h3>
+        <p class="mt-2 text-sm opacity-85">{manicura.descripcion}</p>
+        <p class="mt-6 text-eyebrow opacity-70">Desde</p>
+        <p class="font-display text-5xl sm:text-6xl">15€</p>
+      </article>
+
+      <!-- Nail Art -->
+      <article class="glow-card relative col-span-1 overflow-hidden rounded-3xl p-6 md:col-span-2 sm:p-7 reveal-up" style="background: var(--color-text-dark); color: var(--color-text-light);">
+        <p class="text-eyebrow" style="color: var(--color-accent);">04 · {nailart.categoria}</p>
+        <h3 class="mt-3 font-display text-2xl sm:text-3xl">Diseños únicos</h3>
+        <p class="mt-2 text-sm opacity-80">3D, mano alzada, encapsulado, Press On a medida.</p>
+        <div class="mt-5 flex flex-wrap gap-2">
+          {nailart.items.map((it) => (
+            <span class="rounded-full border border-white/15 px-2.5 py-1 text-[11px] opacity-90">{it.nombre}</span>
+          ))}
+        </div>
+      </article>
+
+      <!-- Pedicura -->
+      <article class="glow-card relative col-span-1 overflow-hidden rounded-3xl border border-[var(--color-line)] bg-[var(--color-surface)] p-6 md:col-span-3 sm:p-7 reveal-up">
+        <div class="flex items-start justify-between gap-4">
+          <div>
+            <p class="text-eyebrow text-[var(--color-primary)]">03 · {pedicura.categoria}</p>
+            <h3 class="mt-3 font-display text-2xl text-[var(--color-text-dark)] sm:text-3xl">Pies como nuevos</h3>
+            <p class="mt-2 text-sm text-[var(--color-text-muted)]">{pedicura.descripcion}</p>
+          </div>
+          <span class="rounded-full bg-[var(--color-primary-soft)] px-2.5 py-1 text-[10px] font-medium uppercase tracking-wider text-[var(--color-primary)]">Top</span>
+        </div>
+        <ul class="mt-5 space-y-1.5 text-sm">
+          {pedicura.items.slice(0, 3).map((it) => (
+            <li class="flex items-baseline justify-between">
+              <span class="text-[var(--color-text-dark)]">{it.nombre}</span>
+              <span class="font-display text-[var(--color-primary)] tabular-nums">{it.desde}€</span>
+            </li>
+          ))}
+        </ul>
+      </article>
+
+      <!-- Confianza -->
+      <article class="relative col-span-1 overflow-hidden rounded-3xl p-6 md:col-span-3 sm:p-7 reveal-up" style="background: var(--color-primary-soft);">
+        <p class="text-eyebrow" style="color: var(--color-primary);">Garantía Pelegrin</p>
+        <h3 class="mt-3 font-display text-2xl text-[var(--color-text-dark)] sm:text-3xl">Si una uña se rompe en 48h, te la reparamos.</h3>
+        <p class="mt-3 text-sm text-[var(--color-text-muted)]">Solo cobramos 2€ de reparación si la rotura es por uso normal. Cero discusión.</p>
+      </article>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,174 @@
+---
+import { negocio, fotosHero } from '../data/negocio';
+---
+
+<section
+  id="contenido"
+  class="relative overflow-hidden pt-24 pb-12 sm:pt-28 md:pt-32 lg:pt-36 lg:pb-20"
+  style="background: var(--color-background);"
+>
+  <!-- Ghost script gigante de fondo -->
+  <div
+    class="pointer-events-none absolute inset-x-0 -bottom-16 select-none text-center lg:-bottom-24"
+    aria-hidden="true"
+  >
+    <span class="ghost-script block" style="font-size: clamp(8rem, 24vw, 22rem);">Ashley</span>
+  </div>
+
+  <div class="relative mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
+    <div class="grid items-center gap-10 lg:grid-cols-12 lg:gap-14">
+      <!-- Texto (en mobile va después de la foto) -->
+      <div class="order-2 lg:order-1 lg:col-span-7">
+        <div class="mb-5 flex flex-wrap items-center gap-3 sm:gap-4">
+          <span class="text-eyebrow text-[var(--color-text-muted)]">Madrid · Villaverde · Desde 2019</span>
+          <span class="flex items-center gap-2 rounded-full border border-[var(--color-line)] bg-[var(--color-surface)] px-2.5 py-1">
+            <span class="relative inline-flex h-1.5 w-1.5">
+              <span class="pulse-dot absolute inset-0 rounded-full bg-emerald-500"></span>
+              <span class="relative h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
+            </span>
+            <span id="liveStatus" class="text-[11px] font-medium text-[var(--color-text-dark)]">Abierto ahora</span>
+          </span>
+        </div>
+
+        <h1 class="text-display-xl text-text-dark">
+          Hola, soy<br />
+          <span class="italic text-script" style="font-size: clamp(4.5rem, 16vw, 13rem); color: var(--color-accent-deep); display: inline-block; transform: translateY(-0.08em); line-height: 0.7;">Ashley</span><br />
+          y esto es lo<br />
+          mío.
+        </h1>
+
+        <p class="mt-7 max-w-xl text-[15px] leading-relaxed text-[var(--color-text-muted)] sm:text-base">
+          Llevo <span class="text-[var(--color-text-dark)] font-medium">+6 años</span> esculpiendo uñas en Madrid.
+          Empecé con una lima y un sueño en
+          <span class="text-[var(--color-text-dark)]">Calle Esperanza Macarena</span>; hoy somos tres,
+          atendemos a 384 clientas fieles y seguimos cuidando cada uña como si fuera la primera.
+        </p>
+
+        <div class="mt-9 flex flex-wrap items-center gap-3 sm:gap-4">
+          <a
+            href={negocio.booking}
+            target="_blank"
+            rel="noopener"
+            class="magnetic group inline-flex items-center gap-2 rounded-full bg-[var(--color-primary)] px-6 py-4 text-sm font-medium text-[var(--color-text-light)] transition-colors hover:bg-[var(--color-accent-deep)]"
+          >
+            Pide cita conmigo
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" class="transition-transform group-hover:translate-x-1">
+              <path d="M5 12h14M13 5l7 7-7 7" />
+            </svg>
+          </a>
+          <a
+            href={negocio.whatsappLink}
+            target="_blank"
+            rel="noopener"
+            class="inline-flex items-center gap-2 rounded-full border border-[var(--color-primary)] bg-transparent px-6 py-4 text-sm font-medium text-[var(--color-primary)] transition-colors hover:bg-[var(--color-primary)] hover:text-[var(--color-text-light)]"
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.71.306 1.263.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884"/>
+            </svg>
+            WhatsApp
+          </a>
+        </div>
+
+        <!-- Rating real + ubicación -->
+        <div class="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3">
+          <div class="flex items-center gap-2">
+            <div class="flex">
+              {[1,2,3,4,5].map(() => (
+                <svg class="h-4 w-4 text-[var(--color-accent-deep)]" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                  <path d="M10 1l2.6 5.27 5.82.85-4.21 4.1.99 5.78L10 14.27 4.8 17l.99-5.78L1.58 7.12l5.82-.85L10 1z"/>
+                </svg>
+              ))}
+            </div>
+            <span class="text-sm font-semibold text-[var(--color-text-dark)]">{negocio.rating.valor}</span>
+            <span class="text-xs text-[var(--color-text-muted)]">· {negocio.rating.total} reseñas Booksy</span>
+          </div>
+          <div class="hairline hidden h-4 w-px bg-[var(--color-line)] sm:block"></div>
+          <div class="text-xs text-[var(--color-text-muted)]">
+            <span class="text-[var(--color-text-dark)] font-medium">{negocio.direccion.calle}</span> · {negocio.direccion.cp} {negocio.direccion.ciudad}
+          </div>
+        </div>
+      </div>
+
+      <!-- Retrato editorial de Ashley -->
+      <div class="order-1 lg:order-2 lg:col-span-5">
+        <div class="relative mx-auto aspect-[4/5] w-full max-w-md lg:max-w-none">
+          <!-- Marco editorial con foto real de Ashley -->
+          <div class="absolute inset-0 overflow-hidden rounded-[28px] shadow-2xl" style="background: var(--color-dark-section);">
+            <img
+              src={fotosHero.ashley}
+              alt="Ashley Pelegrin, fundadora de Ashley Pelegrin Beauty Nails, con blazer blanco y pinceles de nail art"
+              class="h-full w-full object-cover"
+              loading="eager"
+              fetchpriority="high"
+              width="1640"
+              height="1093"
+            />
+            <!-- Vignette inferior -->
+            <div class="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/55 to-transparent"></div>
+
+            <!-- Firma editorial inferior -->
+            <div class="absolute bottom-5 left-5 right-5 flex items-end justify-between gap-3 text-[var(--color-text-light)]">
+              <div>
+                <p class="text-eyebrow opacity-80">La fundadora</p>
+                <p class="font-display text-2xl sm:text-3xl leading-tight">Ashley Pelegrin</p>
+              </div>
+              <span class="rounded-full px-3 py-1.5 text-[10px] uppercase tracking-[0.18em] backdrop-blur-md" style="background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.18);">Nail Artist</span>
+            </div>
+          </div>
+
+          <!-- Polaroid trabajo real -->
+          <div class="polaroid absolute -bottom-6 -left-4 hidden w-32 -rotate-6 sm:block lg:w-36 xl:w-40">
+            <img src={fotosHero.poster1} alt="Trabajo real: acrílicas 3D nude rosa" class="aspect-square w-full object-cover" width="200" height="200" loading="eager" />
+            <p class="mt-2 text-center font-display text-[11px] text-[var(--color-text-dark)]">3D Nude</p>
+          </div>
+
+          <!-- Polaroid trabajo real 2 -->
+          <div class="polaroid absolute -right-3 -top-4 hidden w-32 rotate-6 sm:block lg:w-36 xl:w-40">
+            <img src={fotosHero.poster2} alt="Trabajo real: uñas tornasol esmeralda" class="aspect-square w-full object-cover" width="200" height="200" loading="eager" />
+            <p class="mt-2 text-center font-display text-[11px] text-[var(--color-text-dark)]">Tornasol</p>
+          </div>
+
+          <!-- Badge precio firma -->
+          <div
+            class="absolute -bottom-3 left-1/2 z-10 -translate-x-1/2 whitespace-nowrap rounded-full px-3.5 py-2 text-[10px] uppercase tracking-[0.18em] shadow-lg sm:left-auto sm:right-6 sm:-top-3 sm:translate-x-0 sm:bottom-auto"
+            style="background: var(--color-accent-deep); color: var(--color-text-light);"
+          >
+            Acrílicas desde <span class="text-gradient-gold font-semibold">35€</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const horario = [
+    null,
+    { abre: '10:00', cierra: '20:00' },
+    { abre: '10:00', cierra: '20:00' },
+    { abre: '10:00', cierra: '20:00' },
+    { abre: '10:00', cierra: '20:00' },
+    { abre: '10:00', cierra: '20:00' },
+    { abre: '10:00', cierra: '14:00' },
+  ];
+  const el = document.getElementById('liveStatus');
+  if (el) {
+    const now = new Date();
+    const day = horario[now.getDay()];
+    if (!day) {
+      el.textContent = 'Cerrado hoy';
+    } else {
+      const [oh, om] = day.abre.split(':').map(Number);
+      const [ch, cm] = day.cierra.split(':').map(Number);
+      const open = new Date(now); open.setHours(oh, om, 0);
+      const close = new Date(now); close.setHours(ch, cm, 0);
+      if (now >= open && now < close) {
+        el.textContent = `Abierto · Hasta ${day.cierra}`;
+      } else if (now < open) {
+        el.textContent = `Hoy abre ${day.abre}`;
+      } else {
+        el.textContent = 'Cerrado por hoy';
+      }
+    }
+  }
+</script>

@@ -1,0 +1,14 @@
+---
+interface Props {
+  color?: string;
+}
+const { color = 'var(--color-primary)' } = Astro.props;
+---
+
+<div class="flex items-center justify-center gap-4 py-2 sm:gap-6" aria-hidden="true">
+  <span class="h-px w-12 sm:w-16" style={`background: linear-gradient(90deg, transparent, ${color}, transparent);`}></span>
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" style={`color: ${color};`}>
+    <path d="M12 2l1.5 8.5L22 12l-8.5 1.5L12 22l-1.5-8.5L2 12l8.5-1.5L12 2z" fill="currentColor" opacity="0.7"/>
+  </svg>
+  <span class="h-px w-12 sm:w-16" style={`background: linear-gradient(90deg, transparent, ${color}, transparent);`}></span>
+</div>

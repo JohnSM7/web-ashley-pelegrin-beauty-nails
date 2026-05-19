@@ -1,0 +1,96 @@
+---
+import { negocio, fotosHero } from '../data/negocio';
+---
+
+<section id="fundadora" class="relative overflow-hidden py-20 sm:py-28 lg:py-36" style="background: var(--color-dark-section); color: var(--color-text-light);">
+  <!-- Ornamento script grande de fondo -->
+  <div class="pointer-events-none absolute -right-12 top-8 select-none opacity-[0.08]" aria-hidden="true">
+    <span class="font-script leading-none" style="font-size: clamp(8rem, 18vw, 16rem); color: var(--color-accent);">Pelegrin</span>
+  </div>
+
+  <div class="relative mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
+    <div class="grid items-center gap-10 md:gap-14 lg:grid-cols-12">
+      <!-- Lado izquierdo: logo + foto -->
+      <div class="lg:col-span-5 reveal-up">
+        <div class="relative mx-auto aspect-square w-full max-w-md">
+          <!-- Marco -->
+          <div class="absolute inset-0 overflow-hidden rounded-[28px] shadow-2xl">
+            <img
+              src={fotosHero.logo}
+              alt="Logo Ashley Pelegrin Beauty"
+              class="h-full w-full object-cover"
+              loading="lazy"
+              width="540"
+              height="960"
+            />
+          </div>
+          <!-- Polaroid foto Ashley sobre el logo -->
+          <div class="polaroid absolute -bottom-6 -right-6 w-36 rotate-3 sm:w-44 md:w-48">
+            <img
+              src={fotosHero.ashley}
+              alt="Ashley Pelegrin sosteniendo pinceles de nail art"
+              class="aspect-[4/5] w-full object-cover"
+              loading="lazy"
+              width="200"
+              height="250"
+            />
+            <p class="mt-2 text-center font-display text-[11px] text-[var(--color-text-dark)]">Ashley · Nail Artist</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Lado derecho: historia -->
+      <div class="lg:col-span-7 reveal-up">
+        <p class="text-eyebrow" style="color: var(--color-accent);">La historia · {negocio.fundadora}</p>
+        <h2 class="mt-4 text-display-lg" style="color: var(--color-text-light);">
+          De una lima<br />
+          <span class="italic text-gradient-gold">a un salón.</span>
+        </h2>
+
+        <div class="mt-7 space-y-4 text-base leading-relaxed opacity-90 sm:text-lg">
+          <p>
+            Crecí mirando las manos de mi madre. Cuando llegué a Madrid en 2019, alquilé un local pequeño
+            en Calle Esperanza Macarena con una idea fija: tratar cada uña como una pieza de joyería.
+          </p>
+          <p>
+            Hoy, seis años y <span style="color: var(--color-accent);">384 reseñas verificadas</span> después,
+            somos tres mujeres esculpiendo acrílicas, decorando a mano y rematando con la misma calma del primer día.
+          </p>
+          <p class="font-display text-xl italic sm:text-2xl" style="color: var(--color-text-light);">
+            "Si tus uñas no te miran bien, no sales del salón."
+          </p>
+        </div>
+
+        <!-- Firma -->
+        <div class="mt-8 flex items-center gap-4">
+          <span class="text-script text-5xl" style="color: var(--color-accent);">Ashley P.</span>
+          <span class="hairline h-px w-16 bg-white/20"></span>
+          <span class="text-eyebrow opacity-70">Fundadora & Nail Artist</span>
+        </div>
+
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a
+            href={negocio.booking}
+            target="_blank"
+            rel="noopener"
+            class="magnetic inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm font-medium transition-opacity hover:opacity-90"
+            style="background: var(--color-accent); color: var(--color-text-dark);"
+          >
+            Pide cita conmigo
+          </a>
+          <a
+            href={negocio.redes.instagram}
+            target="_blank"
+            rel="noopener"
+            class="inline-flex items-center gap-2 rounded-full border border-white/30 px-5 py-3 text-sm font-medium transition-colors hover:bg-white/10"
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+              <rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/>
+            </svg>
+            Sígueme
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

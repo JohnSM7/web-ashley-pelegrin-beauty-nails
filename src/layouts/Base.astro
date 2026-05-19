@@ -1,0 +1,234 @@
+---
+import '../styles/global.css';
+import { ClientRouter } from 'astro:transitions';
+import { negocio, equipo, servicios, resenas } from '../data/negocio';
+
+interface Props {
+  title?: string;
+  description?: string;
+  ogImage?: string;
+}
+
+const {
+  title = `${negocio.nombre} · ${negocio.tagline} · Madrid`,
+  description = negocio.descripcion,
+  ogImage = 'https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&w=1200&q=80',
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site).toString();
+
+// Schema.org JSON-LD — BeautySalon completo
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BeautySalon',
+  '@id': `${negocio.web}#salon`,
+  name: negocio.nombre,
+  alternateName: 'Ashley Pelegrin Nails',
+  description: negocio.descripcion,
+  url: negocio.web,
+  telephone: negocio.telefono,
+  email: negocio.email,
+  image: ogImage,
+  priceRange: '€€',
+  founder: {
+    '@type': 'Person',
+    name: negocio.fundadora,
+  },
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: negocio.direccion.calle,
+    postalCode: negocio.direccion.cp,
+    addressLocality: negocio.direccion.ciudad,
+    addressRegion: negocio.direccion.region,
+    addressCountry: negocio.direccion.pais,
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: negocio.geo.lat,
+    longitude: negocio.geo.lng,
+  },
+  openingHoursSpecification: negocio.horario
+    .filter((h) => h.abre && h.cierra)
+    .map((h) => ({
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: h.dia,
+      opens: h.abre,
+      closes: h.cierra,
+    })),
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: negocio.rating.valor,
+    reviewCount: negocio.rating.total,
+    bestRating: 5,
+    worstRating: 1,
+  },
+  review: resenas.slice(0, 5).map((r) => ({
+    '@type': 'Review',
+    reviewRating: { '@type': 'Rating', ratingValue: r.rating, bestRating: 5 },
+    author: { '@type': 'Person', name: r.autor },
+    reviewBody: r.texto,
+    datePublished: r.fecha,
+  })),
+  sameAs: [
+    negocio.redes.instagram,
+    negocio.redes.facebook,
+    negocio.redes.tiktok,
+    negocio.redes.booksy,
+  ],
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Servicios de uñas',
+    itemListElement: servicios.flatMap((cat) =>
+      cat.items.map((s) => ({
+        '@type': 'Offer',
+        itemOffered: { '@type': 'Service', name: s.nombre, category: cat.categoria },
+        price: s.desde,
+        priceCurrency: 'EUR',
+      })),
+    ),
+  },
+  employee: equipo.map((e) => ({
+    '@type': 'Person',
+    name: `${e.nombre} ${e.apellido}`.trim(),
+    jobTitle: e.rol,
+  })),
+  knowsLanguage: negocio.idiomas,
+  paymentAccepted: 'Efectivo, Tarjeta, Bizum',
+  currenciesAccepted: 'EUR',
+};
+
+const breadcrumbLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Inicio', item: negocio.web },
+  ],
+};
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+
+    <!-- Robots & color -->
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+    <meta name="theme-color" content="#f5ecdf" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#1d1814" media="(prefers-color-scheme: dark)" />
+
+    <!-- Geo -->
+    <meta name="geo.region" content="ES-MD" />
+    <meta name="geo.placename" content={negocio.direccion.ciudad} />
+    <meta name="geo.position" content={`${negocio.geo.lat};${negocio.geo.lng}`} />
+    <meta name="ICBM" content={`${negocio.geo.lat}, ${negocio.geo.lng}`} />
+
+    <!-- Business contact data -->
+    <meta property="business:contact_data:street_address" content={negocio.direccion.calle} />
+    <meta property="business:contact_data:locality" content={negocio.direccion.ciudad} />
+    <meta property="business:contact_data:postal_code" content={negocio.direccion.cp} />
+    <meta property="business:contact_data:country_name" content="España" />
+    <meta property="business:contact_data:phone_number" content={negocio.telefono} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="business.business" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:site_name" content={negocio.nombre} />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,300..700,0..100,0..1&family=Inter:wght@300;400;500;600;700&family=Italianno&display=swap"
+    />
+
+    <!-- Preload critical hero image (foto real de Ashley) -->
+    <link rel="preload" as="image" href="/images/ashley-retrato.jpg" fetchpriority="high" />
+
+    <!-- JSON-LD -->
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbLd)} />
+
+    <ClientRouter />
+  </head>
+  <body>
+    <a href="#contenido" class="skip-link">Saltar al contenido</a>
+    <slot />
+
+    <script is:inline>
+      // Marcar JS activo cuanto antes (progressive enhancement)
+      document.documentElement.classList.add('js-on');
+    </script>
+    <script>
+      // Cursor glow para .glow-card
+      const cards = document.querySelectorAll<HTMLElement>('.glow-card');
+      cards.forEach((card) => {
+        card.addEventListener('pointermove', (e) => {
+          const r = card.getBoundingClientRect();
+          card.style.setProperty('--mx', `${e.clientX - r.left}px`);
+          card.style.setProperty('--my', `${e.clientY - r.top}px`);
+        });
+      });
+
+      // Magnetic buttons
+      const magnets = document.querySelectorAll<HTMLElement>('.magnetic');
+      magnets.forEach((m) => {
+        m.addEventListener('pointermove', (e) => {
+          const r = m.getBoundingClientRect();
+          const x = (e.clientX - r.left - r.width / 2) * 0.25;
+          const y = (e.clientY - r.top - r.height / 2) * 0.25;
+          m.style.transform = `translate(${x}px, ${y}px)`;
+        });
+        m.addEventListener('pointerleave', () => {
+          m.style.transform = '';
+        });
+      });
+
+      // Reveal-up con IntersectionObserver (con fallback a visible)
+      const reveals = document.querySelectorAll('.reveal-up');
+      if ('IntersectionObserver' in window) {
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((e) => {
+              if (e.isIntersecting) {
+                e.target.classList.add('is-visible');
+                io.unobserve(e.target);
+              }
+            });
+          },
+          { threshold: 0.05, rootMargin: '0px 0px -40px 0px' },
+        );
+        reveals.forEach((r) => io.observe(r));
+        // Fallback: si algún reveal sigue oculto tras 4s, mostrarlo
+        setTimeout(() => {
+          document
+            .querySelectorAll('.reveal-up:not(.is-visible)')
+            .forEach((r) => r.classList.add('is-visible'));
+        }, 4000);
+      } else {
+        reveals.forEach((r) => r.classList.add('is-visible'));
+      }
+    </script>
+  </body>
+</html>

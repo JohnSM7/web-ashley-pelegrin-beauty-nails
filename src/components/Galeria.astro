@@ -1,0 +1,49 @@
+---
+import { galeria } from '../data/negocio';
+---
+
+<section id="galeria" class="relative overflow-hidden py-20 sm:py-28" style="background: var(--color-background);">
+  <div class="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
+    <div class="mb-12 flex flex-col gap-4 sm:mb-14 md:flex-row md:items-end md:justify-between">
+      <div class="reveal-up">
+        <p class="text-eyebrow text-[var(--color-primary)]">Portfolio</p>
+        <h2 class="mt-3 text-display-lg text-text-dark">
+          Trabajos<br />
+          <span class="italic" style="color: var(--color-primary);">recientes.</span>
+        </h2>
+      </div>
+      <p class="max-w-sm text-sm text-[var(--color-text-muted)] reveal-up">
+        Selección de citas de las últimas semanas. Más en
+        <a href="https://www.instagram.com/ashleypelegrinbeauty" target="_blank" rel="noopener" class="font-medium text-[var(--color-text-dark)] underline-offset-4 hover:underline">@ashleypelegrinbeauty</a>.
+      </p>
+    </div>
+
+    <!-- Masonry editorial -->
+    <div class="columns-1 gap-4 sm:columns-2 sm:gap-5 lg:columns-3 lg:gap-6 [&>*]:mb-4 sm:[&>*]:mb-5 lg:[&>*]:mb-6">
+      {galeria.map((foto, i) => (
+        <figure
+          class={`group relative overflow-hidden rounded-2xl bg-[var(--color-surface)] break-inside-avoid reveal-up ${
+            i === 0 ? 'aspect-[4/5]' : i === 1 ? 'aspect-square' : i === 2 ? 'aspect-[3/4]' : i === 3 ? 'aspect-[4/5]' : i === 4 ? 'aspect-square' : 'aspect-[3/4]'
+          }`}
+        >
+          <img
+            src={foto.src}
+            alt={foto.alt}
+            class="h-full w-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-105"
+            loading="lazy"
+            decoding="async"
+            width="800"
+            height="1000"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
+          <figcaption class="absolute inset-x-0 bottom-0 flex translate-y-4 items-end justify-between gap-4 p-4 text-[var(--color-text-light)] opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100 sm:p-5">
+            <div>
+              <p class="text-eyebrow opacity-80">N.º {foto.numero}</p>
+              <p class="font-display text-lg sm:text-xl">{foto.caption}</p>
+            </div>
+          </figcaption>
+        </figure>
+      ))}
+    </div>
+  </div>
+</section>
