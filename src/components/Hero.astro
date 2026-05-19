@@ -116,24 +116,24 @@ import { negocio, fotosHero } from '../data/negocio';
             </div>
           </div>
 
-          <!-- Polaroid trabajo real -->
-          <div class="polaroid absolute -bottom-6 -left-4 hidden w-32 -rotate-6 sm:block lg:w-36 xl:w-40">
+          <!-- Polaroid trabajo real (esquina superior izquierda — fuera del retrato) -->
+          <div class="polaroid absolute -left-10 top-6 hidden w-28 -rotate-[10deg] sm:block lg:-left-14 lg:w-32 xl:-left-20 xl:w-36">
             <img src={fotosHero.poster1} alt="Trabajo real: acrílicas 3D nude rosa" class="aspect-square w-full object-cover" width="200" height="200" loading="eager" />
             <p class="mt-2 text-center font-display text-[11px] text-[var(--color-text-dark)]">3D Nude</p>
           </div>
 
-          <!-- Polaroid trabajo real 2 -->
-          <div class="polaroid absolute -right-3 -top-4 hidden w-32 rotate-6 sm:block lg:w-36 xl:w-40">
+          <!-- Polaroid trabajo real 2 (esquina inferior derecha — fuera del retrato) -->
+          <div class="polaroid absolute -bottom-10 -right-8 hidden w-28 rotate-[8deg] sm:block lg:-right-12 lg:w-32 xl:-right-16 xl:w-36">
             <img src={fotosHero.poster2} alt="Trabajo real: uñas tornasol esmeralda" class="aspect-square w-full object-cover" width="200" height="200" loading="eager" />
             <p class="mt-2 text-center font-display text-[11px] text-[var(--color-text-dark)]">Tornasol</p>
           </div>
 
-          <!-- Badge precio firma -->
+          <!-- Badge precio firma (arriba a la izquierda, fuera del retrato) -->
           <div
-            class="absolute -bottom-3 left-1/2 z-10 -translate-x-1/2 whitespace-nowrap rounded-full px-3.5 py-2 text-[10px] uppercase tracking-[0.18em] shadow-lg sm:left-auto sm:right-6 sm:-top-3 sm:translate-x-0 sm:bottom-auto"
+            class="absolute -top-3 left-4 z-10 whitespace-nowrap rounded-full px-3.5 py-2 text-[10px] uppercase tracking-[0.18em] shadow-lg sm:left-6"
             style="background: var(--color-accent-deep); color: var(--color-text-light);"
           >
-            Acrílicas desde <span class="text-gradient-gold font-semibold">35€</span>
+            Acrílicas desde <span class="font-display text-[13px] font-semibold not-italic" style="color: var(--color-text-light); letter-spacing: 0;">35€</span>
           </div>
         </div>
       </div>
