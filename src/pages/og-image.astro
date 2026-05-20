@@ -1,0 +1,215 @@
+---
+// Esta página solo existe para renderizar la imagen og:image.
+// Tras generar /public/og-v2.jpg con Playwright, se puede dejar
+// o eliminar — el og:image final vive en /public/.
+import { negocio } from '../data/negocio';
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>OG Image</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,300..700,0..100,0..1&family=Inter:wght@400;500;600&family=Italianno&display=swap"
+    />
+    <style>
+      :root {
+        --bg: oklch(0.22 0.03 30);
+        --accent: oklch(0.72 0.105 45);
+        --accent-deep: oklch(0.55 0.115 40);
+        --text: oklch(0.96 0.012 55);
+      }
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      html, body { width: 1200px; height: 630px; overflow: hidden; background: var(--bg); }
+      body {
+        font-family: 'Inter', sans-serif;
+        color: var(--text);
+        display: grid;
+        grid-template-columns: 540px 1fr;
+        position: relative;
+      }
+
+      /* Lado izquierdo: foto de Ashley */
+      .photo {
+        position: relative;
+        height: 100%;
+        overflow: hidden;
+      }
+      .photo img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center 20%;
+      }
+      .photo::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(90deg, transparent 60%, var(--bg));
+      }
+
+      /* Lado derecho: branding */
+      .info {
+        padding: 60px 70px 60px 50px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        position: relative;
+      }
+
+      /* Ghost script de fondo */
+      .ghost {
+        position: absolute;
+        bottom: -40px;
+        right: -20px;
+        font-family: 'Italianno', cursive;
+        font-size: 420px;
+        line-height: 0.85;
+        color: transparent;
+        -webkit-text-stroke: 1px color-mix(in oklab, var(--accent) 30%, transparent);
+        user-select: none;
+        pointer-events: none;
+      }
+
+      .top {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        position: relative;
+        z-index: 1;
+      }
+      .logo-circle {
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        overflow: hidden;
+        flex: none;
+      }
+      .logo-circle img { width: 100%; height: 100%; object-fit: cover; }
+      .brand {
+        font-family: 'Fraunces', serif;
+        font-size: 28px;
+        letter-spacing: -0.01em;
+      }
+      .brand-sub {
+        font-size: 11px;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        opacity: 0.7;
+        margin-top: 2px;
+      }
+
+      .middle { position: relative; z-index: 1; }
+      .eyebrow {
+        font-size: 12px;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 18px;
+      }
+      h1 {
+        font-family: 'Fraunces', serif;
+        font-weight: 400;
+        font-size: 70px;
+        line-height: 0.98;
+        letter-spacing: -0.025em;
+      }
+      h1 .script {
+        font-family: 'Italianno', cursive;
+        font-size: 130px;
+        color: var(--accent);
+        line-height: 0.55;
+        display: inline-block;
+        transform: translateY(0.1em);
+      }
+      .desc {
+        font-size: 18px;
+        line-height: 1.45;
+        opacity: 0.82;
+        margin-top: 22px;
+        max-width: 480px;
+      }
+
+      .bottom {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        position: relative;
+        z-index: 1;
+        padding-top: 24px;
+        border-top: 1px solid color-mix(in oklab, var(--text) 18%, transparent);
+      }
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 9px 14px;
+        border-radius: 999px;
+        background: var(--accent-deep);
+        font-size: 13px;
+        font-weight: 500;
+      }
+      .stars {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 14px;
+      }
+      .stars svg { color: var(--accent); }
+      .stars b { font-family: 'Fraunces', serif; font-size: 18px; font-weight: 500; }
+      .stars span { opacity: 0.65; font-size: 13px; }
+
+      .loc {
+        margin-left: auto;
+        text-align: right;
+        font-size: 12px;
+        opacity: 0.7;
+        line-height: 1.4;
+      }
+      .loc b { display: block; font-family: 'Fraunces', serif; font-size: 15px; color: var(--text); font-weight: 500; opacity: 1; }
+    </style>
+  </head>
+  <body>
+    <div class="photo">
+      <img src="/images/ashley-retrato.jpg" alt="" />
+    </div>
+
+    <div class="info">
+      <span class="ghost">Ashley</span>
+
+      <div class="top">
+        <div class="logo-circle"><img src="/images/logo-marca.jpg" alt="" /></div>
+        <div>
+          <div class="brand">Ashley Pelegrin</div>
+          <div class="brand-sub">Beauty Nails · Madrid</div>
+        </div>
+      </div>
+
+      <div class="middle">
+        <p class="eyebrow">Salón de uñas premium</p>
+        <h1>
+          Hola, soy<br />
+          <span class="script">Ashley</span>
+        </h1>
+        <p class="desc">
+          Manicura, acrílicas esculpidas y pedicura desde 2019 en Calle Esperanza Macarena.
+        </p>
+      </div>
+
+      <div class="bottom">
+        <span class="pill">Acrílicas desde 35€</span>
+        <span class="stars">
+          <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.27 5.82.85-4.21 4.1.99 5.78L10 14.27 4.8 17l.99-5.78L1.58 7.12l5.82-.85L10 1z"/></svg>
+          <b>{negocio.rating.valor}</b>
+          <span>· {negocio.rating.total} reseñas</span>
+        </span>
+        <div class="loc">
+          <b>Madrid</b>
+          Villaverde · Los Rosales
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
