@@ -30,7 +30,7 @@ export const negocio = {
   whatsapp: '34634980316',
   whatsappLink: 'https://wa.me/34634980316?text=Hola%20Ashley%2C%20me%20gustaría%20pedir%20una%20cita%20✨',
   email: 'hola@ashleypelegrinbeauty.es',
-  web: 'https://ashleypelegrinbeauty.es',
+  web: 'https://web-ashley-pelegrin-beauty-nails.vercel.app',
   booking: 'https://booksy.com/es-es/2907_ashley-pelegrin-beauty_salon-de-unas_53009_madrid',
   idiomas: ['Español', 'Inglés básico'],
   rating: {
